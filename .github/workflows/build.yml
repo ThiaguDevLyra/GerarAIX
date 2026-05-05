@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'src/**'
+      - 'rush.yml'
   workflow_dispatch:
 
 jobs:
@@ -22,17 +23,23 @@ jobs:
 
       - name: Install Rush CLI
         run: |
-          # Usa o script oficial que baixa o binário pré-compilado
           curl -L https://raw.githubusercontent.com/shreyashsaitwal/rush-cli/main/scripts/install/install.sh | bash
           echo "$HOME/.rush/bin" >> $GITHUB_PATH
 
       - name: Build Extension
         run: |
-          # O comando rush build agora deve ser reconhecido
+          # Verifica se o rush está acessível
+          rush --version
+          # Executa o build
           rush build --verbose
+          # Debug: Lista todos os arquivos para encontrar o .aix
+          ls -R
           
       - name: Upload AIX
         uses: actions/upload-artifact@v4
         with:
           name: extension-package
-          path: out/*.aix
+          # Tenta buscar em out/ ou bin/
+          path: |
+            out/*.aix
+            bin/*.aix
