@@ -26,8 +26,8 @@ jobs:
 
       - name: Install Rush CLI
         run: |
-          # Baixa a versão mais recente do Rush para Linux
-          curl -L https://github.com/shreyashsaitwal/rush-cli/releases/latest/download/rush-linux -o rush
+          # Baixa a versão 1.2.5 (estável) do Rush
+          curl -L https://github.com/shreyashsaitwal/rush-cli/releases/download/v1.2.5/rush-linux -o rush
           chmod +x rush
           sudo mv rush /usr/local/bin/rush
 
