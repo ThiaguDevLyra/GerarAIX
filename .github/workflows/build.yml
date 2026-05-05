@@ -26,22 +26,11 @@ jobs:
 
       - name: Install Rush CLI
         run: |
-          # Baixa o executável do Rush diretamente dos assets da release
-          # O nome do asset para Linux no repositório oficial é geralmente apenas 'rush'
-          curl -L https://github.com/shreyashsaitwal/rush-cli/releases/latest/download/rush -o rush
-          
-          # Verifica se o download foi bem sucedido (evita o erro 'Not found')
-          if grep -q "Not Found" rush; then
-            echo "Erro: O link de download do Rush falhou (404). Tentando método alternativo..."
-            curl -L https://github.com/shreyashsaitwal/rush-cli/releases/download/v1.2.5/rush -o rush
-          fi
-          
-          chmod +x rush
-          sudo mv rush /usr/local/bin/rush
+          dart pub global activate --source git https://github.com/shreyashsaitwal/rush-cli
+          echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
 
       - name: Build Extension
         run: |
-          # Garante que estamos na raiz do projeto onde está o rush.yml
           rush build --verbose
           
       - name: Upload AIX
