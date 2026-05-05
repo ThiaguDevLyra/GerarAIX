@@ -1,41 +1,39 @@
-# Instruções para o Repositório de Build no GitHub (REAL BUILD com Rush)
-# Você deve criar um repositório no GitHub para servir de 'fábrica'.
-# Adicione este arquivo em: .github/workflows/build.yml
-
 name: AIX Builder (Rush)
 on:
   push:
     paths:
       - 'src/**'
+      - 'rush.yml'
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
       - name: Set up JDK 8
         uses: actions/setup-java@v4
         with:
           java-version: '8'
           distribution: 'temurin'
-          
-      - name: Set up Dart
-        uses: dart-lang/setup-dart@v1
 
-      - name: Install Rush CLI
-        run: dart pub global activate rush_cli
+      - name: Install Rush CLI (Binary)
+        run: |
+          # Baixando a versão estável mais recente do Rush
+          curl -L -o rush https://github.com/shreyashsaitwal/rush-cli/releases/latest/download/rush-linux
+          chmod +x rush
+          sudo mv rush /usr/local/bin/rush
+          rush --version
 
       - name: Build Extension
-        run: |
-          export PATH="$PATH":"$HOME/.pub-cache/bin"
-          # DEBUG: Mostrar estrutura de arquivos para verificar se o Rush encontra tudo
-          ls -R
+     - run: |
+          # O Rush precisa de um arquivo rush.yml válido na raiz
           rush build --verbose
-          
+
       - name: Upload AIX
         uses: actions/upload-artifact@v4
         with:
-          name: extension-package
+          name: extension-aix
           path: out/*.aix
