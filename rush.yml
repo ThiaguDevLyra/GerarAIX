@@ -1,5 +1,12 @@
+---
+# Configurações básicas da extensão
 name: LyraExtension
-id: com.lyra.studio
-version: "1"
-description: "Gerado automaticamente pelo Lyra AIX Studio"
-author: "ThiaguDevLyra"
+package: com.lyra.studio
+version:
+  number: 1
+  name: "1.0"
+author: "Lyra AIX Studio"
+description: "Extensão gerada por IA"
+
+# Não remova estas linhas se estiver usando Rush
+# O Rush gerencia as dependências internas sozinho
