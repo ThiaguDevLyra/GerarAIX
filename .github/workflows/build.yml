@@ -28,18 +28,20 @@ jobs:
 
       - name: Build Extension
         run: |
-          # Verifica se o rush está acessível
+          # Mostra a versão para confirmar instalação
           rush --version
           # Executa o build
           rush build --verbose
-          # Debug: Lista todos os arquivos para encontrar o .aix
+          
+      - name: Check Output
+        run: |
+          echo "Verificando arquivos gerados..."
           ls -R
           
       - name: Upload AIX
         uses: actions/upload-artifact@v4
         with:
           name: extension-package
-          # Tenta buscar em out/ ou bin/
-          path: |
-            out/*.aix
-            bin/*.aix
+          # O Rush gera em 'out/', mas o asterisco ajuda a pegar o nome correto
+          path: out/*.aix
+          if-no-files-found: error
