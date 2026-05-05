@@ -1,5 +1,11 @@
+# Arquivo de configuração do Rush
 name: AdaptiveWebViewer
-package: com.lyra.studio
-version: "1"
-authors: [ThiagoDevLyra]
-description: WebViewer adaptativo que não some com o teclado.
+# O ID deve ser o mesmo do seu pacote Java
+id: com.lyra.studio
+version: "1.0.0"
+author: "ThiagoDevLyra"
+description: "Um custom webviewer adaptativo"
+
+# Caminho para o código-fonte (geralmente 'src')
+source:
+  src: src
