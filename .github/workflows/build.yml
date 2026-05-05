@@ -1,7 +1,3 @@
-# Instruções para o Repositório de Build no GitHub (REAL BUILD com Rush)
-# Você deve criar um repositório no GitHub para servir de 'fábrica'.
-# Adicione este arquivo em: .github/workflows/build.yml
-
 name: AIX Builder (Rush)
 on:
   push:
@@ -26,11 +22,13 @@ jobs:
 
       - name: Install Rush CLI
         run: |
-          dart pub global activate --source git https://github.com/shreyashsaitwal/rush-cli
-          echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
+          # Usa o script oficial que baixa o binário pré-compilado
+          curl -L https://raw.githubusercontent.com/shreyashsaitwal/rush-cli/main/scripts/install/install.sh | bash
+          echo "$HOME/.rush/bin" >> $GITHUB_PATH
 
       - name: Build Extension
         run: |
+          # O comando rush build agora deve ser reconhecido
           rush build --verbose
           
       - name: Upload AIX
