@@ -30,7 +30,9 @@ jobs:
       - name: Build Extension
         run: |
           export PATH="$PATH":"$HOME/.pub-cache/bin"
-          rush build
+          # DEBUG: Mostrar estrutura de arquivos para verificar se o Rush encontra tudo
+          ls -R
+          rush build --verbose
           
       - name: Upload AIX
         uses: actions/upload-artifact@v4
