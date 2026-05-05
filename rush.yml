@@ -1,11 +1,8 @@
-# Arquivo de configuração do Rush
-name: AdaptiveWebViewer
-# O ID deve ser o mesmo do seu pacote Java
-id: com.lyra.studio
-version: "1.0.0"
-author: "ThiagoDevLyra"
-description: "Um custom webviewer adaptativo"
-
-# Caminho para o código-fonte (geralmente 'src')
-source:
-  src: src
+name: GerarAIX
+package: com.lyra.studio
+version:
+  major: 1
+  minor: 0
+  patch: 0
+author: ThiagoDevLyra
+description: Minha primeira extensao gerada pelo AI Studio
