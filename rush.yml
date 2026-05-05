@@ -1,12 +1,5 @@
----
-# Configurações básicas da extensão
-name: LyraExtension
+name: AdaptiveWebViewer
 package: com.lyra.studio
-version:
-  number: 1
-  name: "1.0"
-author: "Lyra AIX Studio"
-description: "Extensão gerada por IA"
-
-# Não remova estas linhas se estiver usando Rush
-# O Rush gerencia as dependências internas sozinho
+version: "1"
+authors: [ThiagoDevLyra]
+description: WebViewer adaptativo que não some com o teclado.
