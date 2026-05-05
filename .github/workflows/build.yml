@@ -1,4 +1,4 @@
-name: AIX Builder
+name: Real AIX Builder
 on:
   push:
     paths:
@@ -16,19 +16,19 @@ jobs:
         with:
           java-version: '8'
           distribution: 'temurin'
-          
+
+      - name: Install Rush
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/shreyashsaitwal/rush-cli/main/scripts/install/install.sh | bash
+          echo "$HOME/.rush/bin" >> $GITHUB_PATH
+
       - name: Build Extension
         run: |
-          # Instrução: Este é um template simplificado.
-          # No seu repo real, você deve ter a estrutura do MIT App Inventor ou ferramentas como 'Rush'.
+          # O comando 'rush build' compila o código Java em um .aix real
+          rush build
           
-          echo "Simulando build de AIX..."
-          # Mock: Cria um arquivo apenas para testar o upload
-          mkdir -p out
-          touch out/extension.aix
-          
-      - name: Upload AIX
+      - name: Upload AIX Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: extension-package
+          name: Extension-Package
           path: out/*.aix
