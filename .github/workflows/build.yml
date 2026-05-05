@@ -1,8 +1,9 @@
-name: Real AIX Builder
+name: Build AIX
 on:
   push:
     paths:
       - 'src/**'
+      - 'rush.yml'
   workflow_dispatch:
 
 jobs:
@@ -10,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up JDK 8
         uses: actions/setup-java@v4
         with:
@@ -19,16 +20,15 @@ jobs:
 
       - name: Install Rush
         run: |
-          curl -fsSL https://raw.githubusercontent.com/shreyashsaitwal/rush-cli/main/scripts/install/install.sh | bash
-          echo "$HOME/.rush/bin" >> $GITHUB_PATH
+          curl -L https://github.com/shreyashsaitwal/rush-cli/releases/latest/download/rush -o rush
+          chmod +x rush
+          sudo mv rush /usr/local/bin/
 
-      - name: Build Extension
-        run: |
-          # O comando 'rush build' compila o código Java em um .aix real
-          rush build
-          
+      - name: Build with Rush
+        run: rush build
+
       - name: Upload AIX Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Extension-Package
+          name: Extension-AIX
           path: out/*.aix
