@@ -1,10 +1,5 @@
-# Metadados da Extensão
 name: LyraExtension
-author: LyraAI
-description: Extensão gerada automaticamente via Lyra AIX Studio
-
-# Configurações de Build
-package: com.lyra.studio
-version:
-  number: 1
-  name: "1.0"
+id: com.lyra.studio
+version: "1"
+description: "Gerado automaticamente pelo Lyra AIX Studio"
+author: "ThiaguDevLyra"
