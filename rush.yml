@@ -1,8 +1,5 @@
 name: GerarAIX
 package: com.lyra.studio
-version:
-  major: 1
-  minor: 0
-  patch: 0
+version: "1.0.0"
 author: ThiagoDevLyra
 description: Minha primeira extensao gerada pelo AI Studio
