@@ -3,7 +3,6 @@ on:
   push:
     paths:
       - 'src/**'
-      - 'rush.yml'
   workflow_dispatch:
 
 jobs:
@@ -28,14 +27,12 @@ jobs:
 
       - name: Build Extension
         run: |
-          # Executa o build detalhado
           rush build --verbose
           
-      - name: Check Output (Logs de Erro)
-        if: always()
+      - name: Check Output (Debug)
         run: |
-          echo "Verificando pastas geradas..."
-          ls -R
+          echo "Buscando arquivos .aix gerados..."
+          find . -name "*.aix"
           
       - name: Upload AIX
         uses: actions/upload-artifact@v4
@@ -44,4 +41,6 @@ jobs:
           path: |
             out/*.aix
             bin/*.aix
+            **/out/*.aix
+            **/*.aix
           if-no-files-found: error
