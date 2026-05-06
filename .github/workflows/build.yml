@@ -42,5 +42,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: extension-package
-          path: out/*.aix
+          path: "**/out/*.aix"  # Nota as duas estrelas: procura em qualquer lugar dentro de out
           if-no-files-found: error
