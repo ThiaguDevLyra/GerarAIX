@@ -1,12 +1,9 @@
-# Instruções para o Repositório de Build no GitHub (REAL BUILD com Rush)
-# Você deve criar um repositório no GitHub para servir de 'fábrica'.
-# Adicione este arquivo em: .github/workflows/build.yml
-
 name: AIX Builder (Rush)
 on:
   push:
     paths:
       - 'src/**'
+      - 'rush.yml'
   workflow_dispatch:
 
 jobs:
@@ -31,16 +28,18 @@ jobs:
 
       - name: Build Extension
         run: |
+          # O build gera o arquivo .aix na pasta /out
           rush build --verbose
           
       - name: Check Output (Debug)
+        if: always()
         run: |
-          echo "Verificando arquivos gerados..."
+          echo "Listando arquivos para depuração:"
           ls -R
           
       - name: Upload AIX
         uses: actions/upload-artifact@v4
         with:
           name: extension-package
-          path: "**/out/*.aix"  # Nota as duas estrelas: procura em qualquer lugar dentro de out
+          path: "**/out/*.aix"
           if-no-files-found: error
